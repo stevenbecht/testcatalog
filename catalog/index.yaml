@@ -10,7 +10,7 @@ spec:
   bundleMode: generated
   source:
     git:
-      url: https://github.com/REPLACE_ME/public-test-catalog.git
+      url: https://github.com/stevenbecht/testcatalog
       ref: main
   discovery:
     blueprintGlobs:
