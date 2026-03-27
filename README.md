@@ -24,10 +24,10 @@ materializing `Blueprint` resources.
 
 1. Create a new public GitHub repository.
 2. Copy this directory's contents to the new repository root.
-3. Update `cluster/blueprintcatalog.example.yaml` with the new GitHub URL.
+3. Update `catalog/index.yaml` and `cluster/blueprintcatalog.example.yaml` with the new GitHub URL and branch.
 4. Commit and push to `main`.
 5. Apply the example `BlueprintCatalog` manifest to your test cluster.
-6. Inspect the repository from the UI.
+6. Inspect the catalog from the UI using the raw catalog URL, for example `https://raw.githubusercontent.com/<org>/<repo>/main/catalog/index.yaml`.
 7. Review the preview metadata and discovered blueprints.
 8. Save the repository and request a sync from the UI or with:
 

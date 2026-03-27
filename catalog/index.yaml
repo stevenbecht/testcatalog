@@ -8,6 +8,10 @@ spec:
   owners:
     - ai-factory
   bundleMode: generated
+  source:
+    git:
+      url: https://github.com/REPLACE_ME/public-test-catalog.git
+      ref: main
   discovery:
     blueprintGlobs:
       - catalog/blueprints/*/blueprint.yaml
