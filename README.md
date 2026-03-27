@@ -1,17 +1,19 @@
 # Public Test Blueprint Catalog
 
 This directory is a minimal Git repository scaffold for testing `BlueprintCatalog`
-sync from a public Git source.
+inspect and sync from a public Git source.
 
 Copy the contents of this directory into a new public GitHub repository and push
-it to `main`. No repo-side catalog index is required. The current
-`BlueprintCatalog` controller discovers `catalog/blueprints/*/blueprint.yaml`
-directly from Git.
+it to `main`. The current prototype reads repo metadata and blueprint entries
+from `catalog/index.yaml`, then resolves each entry's source location before
+materializing `Blueprint` resources.
 
 ## Layout
 
 - `catalog/blueprints/*/blueprint.yaml`
-  The controller discovers and materializes these into `Blueprint` resources.
+  Example blueprint manifests referenced by `catalog/index.yaml`.
+- `catalog/index.yaml`
+  Catalog descriptor used for preview metadata and entry resolution.
 - `catalog/bundles/`
   Placeholder for future published bundle manifests.
 - `cluster/blueprintcatalog.example.yaml`
@@ -25,7 +27,9 @@ directly from Git.
 3. Update `cluster/blueprintcatalog.example.yaml` with the new GitHub URL.
 4. Commit and push to `main`.
 5. Apply the example `BlueprintCatalog` manifest to your test cluster.
-6. Request a sync from the UI or with:
+6. Inspect the repository from the UI.
+7. Review the preview metadata and discovered blueprints.
+8. Save the repository and request a sync from the UI or with:
 
 ```bash
 kubectl annotate blueprintcatalog public-test \
@@ -34,7 +38,7 @@ kubectl annotate blueprintcatalog public-test \
 
 ## Expected Sync Result
 
-This scaffold includes three blueprints:
+This scaffold includes three indexed blueprints:
 
 - `assistant-starter`
 - `rag-workbench`
