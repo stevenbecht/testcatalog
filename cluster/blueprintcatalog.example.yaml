@@ -1,0 +1,25 @@
+apiVersion: suse.ai/v1alpha1
+kind: BlueprintCatalog
+metadata:
+  name: public-test
+spec:
+  displayName: Public Test Catalog
+  description: Minimal public Git catalog used to verify BlueprintCatalog sync from Git.
+  owners:
+    - ai-factory
+  source:
+    git:
+      url: https://github.com/REPLACE_ME/public-test-catalog.git
+      ref: main
+  discovery:
+    blueprintGlobs:
+      - catalog/blueprints/*/blueprint.yaml
+    bundleGlobs:
+      - catalog/bundles/*/bundle.yaml
+      - catalog/bundles/*/*.yaml
+  bundleMode: generated
+  syncPolicy:
+    interval: 5m
+    suspend: false
+  ui:
+    color: "#2563eb"

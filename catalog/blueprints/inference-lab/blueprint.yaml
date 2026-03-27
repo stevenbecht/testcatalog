@@ -1,0 +1,36 @@
+apiVersion: suse.ai/v1alpha1
+kind: Blueprint
+metadata:
+  name: inference-lab
+spec:
+  displayName: Inference Lab
+  description: GPU inference playground with NVIDIA GPU Operator and vLLM.
+  category: Serving
+  sbom:
+    enabled: true
+    scanImages: true
+  modules:
+    - moduleRef: nvidia-gpu-operator
+      displayName: NVIDIA GPU Operator
+      description: GPU operator for drivers, toolkit, and device plugins.
+      category: Infrastructure
+      support: Community
+      source:
+        git:
+          url: https://github.com/NVIDIA/gpu-operator
+          ref: v25.10.1
+          path: deployments/gpu-operator
+      targetNamespace: nvidia-gpu-operator
+    - moduleRef: vllm-runtime
+      displayName: vLLM Runtime
+      description: High-throughput vLLM runtime for model serving experiments.
+      category: Serving
+      support: Community
+      source:
+        git:
+          url: https://github.com/vllm-project/vllm
+          ref: v0.15.1
+          path: examples/online_serving/chart-helm
+      targetNamespace: tenant-llm
+      dependsOn:
+        - nvidia-gpu-operator

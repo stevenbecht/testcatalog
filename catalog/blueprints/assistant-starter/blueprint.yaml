@@ -1,0 +1,33 @@
+apiVersion: suse.ai/v1alpha1
+kind: Blueprint
+metadata:
+  name: assistant-starter
+spec:
+  displayName: Assistant Starter
+  description: Minimal assistant stack with Ollama and Open WebUI for catalog sync testing.
+  category: AI Application
+  modules:
+    - moduleRef: ollama
+      displayName: Ollama
+      description: Local LLM runtime for model serving.
+      category: Serving
+      support: Community
+      source:
+        git:
+          url: https://github.com/otwld/ollama-helm
+          ref: ollama-1.42.0
+          path: .
+      targetNamespace: ollama
+    - moduleRef: open-webui
+      displayName: Open WebUI
+      description: Browser UI for interacting with local or remote models.
+      category: AI Application
+      support: Community
+      source:
+        git:
+          url: https://github.com/open-webui/helm-charts
+          ref: open-webui-10.2.1
+          path: charts/open-webui
+      targetNamespace: open-webui
+      dependsOn:
+        - ollama

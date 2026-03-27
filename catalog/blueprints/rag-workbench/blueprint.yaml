@@ -1,0 +1,45 @@
+apiVersion: suse.ai/v1alpha1
+kind: Blueprint
+metadata:
+  name: rag-workbench
+spec:
+  displayName: RAG Workbench
+  description: Reference RAG stack with Ollama, Milvus, and Open WebUI.
+  category: AI Application
+  modules:
+    - moduleRef: ollama
+      displayName: Ollama
+      description: Local LLM runtime for embeddings and chat completion experiments.
+      category: Serving
+      support: Community
+      source:
+        git:
+          url: https://github.com/otwld/ollama-helm
+          ref: ollama-1.42.0
+          path: .
+      targetNamespace: ollama
+    - moduleRef: milvus
+      displayName: Milvus
+      description: Vector database for semantic retrieval and embeddings search.
+      category: Data
+      support: Community
+      source:
+        git:
+          url: https://github.com/milvus-io/milvus-helm
+          ref: milvus-4.0.31
+          path: charts/milvus
+      targetNamespace: milvus
+    - moduleRef: open-webui
+      displayName: Open WebUI
+      description: User interface for RAG and chat workflows.
+      category: AI Application
+      support: Community
+      source:
+        git:
+          url: https://github.com/open-webui/helm-charts
+          ref: open-webui-10.2.1
+          path: charts/open-webui
+      targetNamespace: open-webui
+      dependsOn:
+        - ollama
+        - milvus
